@@ -1,7 +1,5 @@
 ## **WelearnCurriculumFinsh**
 
-
-
 ## 特别鸣谢Avenshy和SSmJaE大佬提供的v0.1-4版本
   
 
@@ -12,6 +10,9 @@
 * 已完成和未开放的章节会自动跳过
 
 ## 更新日志
+
+` 0.6dev`
+* 感谢@[yccd01](https://gitee.com/yccd01)提供的pr修复了登陆模块 
 
 ` 0.5dev` 
 
