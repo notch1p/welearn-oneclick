@@ -5,7 +5,7 @@ from time import sleep
 from random import randint
 session = requests.Session()
 # print("**********  特别鸣谢 Avenshy & SSmJaE  **********")
-# print("                 Version:0.5dev\n")
+# print("                 Version:0.6dev\n")
 # print("**********        此版本更新于Hhy       **********")
 # print("***************************************************\n")
 
