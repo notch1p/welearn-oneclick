@@ -1,22 +1,17 @@
-import requests
 import re
-from sys import argv
-from time import sleep
+import sys
 from random import randint
-session = requests.Session()
-# print("**********  特别鸣谢 Avenshy & SSmJaE  **********")
-# print("                 Version:0.6dev\n")
-# print("**********        此版本更新于Hhy       **********")
-# print("***************************************************\n")
 
+import requests
+
+session = requests.Session()
 def printline():
     print('-'*51)
-
 # 获取账户密码
 try:  # 直接从命令行中获取
     username, password = sys.argv[1], sys.argv[2]
 except:
-    loginmode=input('请选择登录方式: \n  1.账号密码登录\n  2.Cookie登录\n\n请输入数字1或2: ')
+    loginmode=input('请选择登录方式: \n  1.账号密码登录(暂时废弃,请直接使用cookies) \n  2.Cookie登录\n\n请输入数字1或2: ')
     printline()
     if loginmode=='1':
         username = input('请输入账号: ')
