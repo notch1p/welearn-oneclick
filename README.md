@@ -1,8 +1,5 @@
 ## **WelearnCurriculumFinsh**
 
-## 特别鸣谢Avenshy和SSmJaE大佬提供的v0.1-4版本
-  
-
 ## 简介
 * 输入账号密码或cookie登录并一键完成课程
 * 可以选择课程
