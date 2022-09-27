@@ -6,6 +6,8 @@
 * 可指定每章节正确率
 * 已完成和未开放的章节会自动跳过
 
+* 有些朋友不会获取cookies[welearn获取cookies教程](http://1304849801.vod2.myqcloud.com/a16827f0vodtranscq1304849801/ae4344ab387702306451821616/v.f80000.mp4)
+
 ## 更新日志
 
 ### ` 0.7dev`
