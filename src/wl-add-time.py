@@ -288,5 +288,4 @@ while True:
 print('运行结束!!\n错误:', len(wrong), '个')
 for i in range(len(wrong)):
     print('第', i + 1, '个错误:', wrong[i])
-print("\n\n\n**********  如果有问题请联系邮箱hhy5562877@163.com  **********\n\n\n")
 input("按任意键退出")
