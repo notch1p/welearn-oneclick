@@ -9,7 +9,7 @@ Based on [this repo](https://gitee.com/xxxhhy/welearn-curriculum-finsh).
 
 ## Usage
 
-**TL;DR**	Pass the cookies thru command line or create a file named `cookies.txt` and paste your cookies in it.
+**TL;DR**	Pass the cookie thru command line or just use it interactively.
 
 - `python finishIt.py`: pass your credentials interactively
 
