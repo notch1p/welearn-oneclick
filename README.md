@@ -19,7 +19,7 @@ Based on [this repo](https://gitee.com/xxxhhy/welearn-curriculum-finsh).
 - `--user, -u {USERNAME:PASSWORD}`: pass by credentials
 
 ```shell
-python -u evan:123456
+python finishIt.py -u evan:123456
 ```
 
 
@@ -27,7 +27,7 @@ python -u evan:123456
 - `--parse, -p {COOKIES}` : pass directly by raw format cookies as shown below
 
 ```shell
-python -p paste-your-cookies-here
+python finishIt.py -p paste-your-cookies-here
 ```
 
   
