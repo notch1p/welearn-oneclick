@@ -5,20 +5,25 @@ from random import randint
 import requests
 
 session = requests.Session()
+
+
 def printline():
     print('-'*51)
 
-try: # from command line
+
+try:  # from command line
     cookie = dict(map(lambda x:x.split('=',1),sys.argv[1].split(';')))
+    # cookie = eval(open("./cookies.txt", 'r').read())
 except:
     printline()
     try:
-        cookie = dict(map(lambda x:x.split('=',1),open('cookies.txt','r').read().split(';')))
+        # cookie = dict(map(lambda x:x.split('=',1),open('cookies.txt','r').read().split(';')))
+        cookie = eval(open("./cookies.txt", 'r').read())
     except:
         input('Cookie输入错误!!!')
         exit(0)
-    for k,v in cookie.items():
-            session.cookies[k]=v
+    for k, v in cookie.items():
+        session.cookies[k] = v
 printline()
 while True:
     # 查询课程信息
@@ -50,26 +55,28 @@ while True:
     classid = re.search('"classid":"(.*?)"', response.text).group(1)
 
     url = 'https://welearn.sflep.com/ajax/StudyStat.aspx'
-    response = session.get(url,params={'action':'courseunits','cid':cid,'uid':uid},headers={'Referer':'https://welearn.sflep.com/student/course_info.aspx'})
+    response = session.get(url, params={'action': 'courseunits', 'cid': cid, 'uid': uid}, headers={
+                           'Referer': 'https://welearn.sflep.com/student/course_info.aspx'})
     back = response.json()['info']
 
     # 选择单元 使用了WELearnToSleeep的代码
     print('[NO. 0]  按顺序完成全部单元课程')
     unitsnum = len(back)
-    for i,x in enumerate(back,start=1):
-        if x['visible']=='true':
+    for i, x in enumerate(back, start=1):
+        if x['visible'] == 'true':
             print(f'[NO.{i:>2d}]  [已开放]  {x["unitname"]}  {x["name"]}')
         else:
             print(f'[NO.{i:>2d}] ![未开放]! {x["unitname"]}  {x["name"]}')
     unitidx = int(input('\n\n请选择需要完成的单元序号（上方[]内的数字，输入0为按顺序刷全部单元）： '))
     printline()
-    inputcrate = input('模式1:每个练习指定正确率，请直接输入指定的正确率\n如:希望每个练习正确率均为100，则输入 100\n\n模式2:每个练习随机正确率，请输入正确率上下限并用英文逗号隔开\n如:希望每个练习正确率为70～100，则输入 70,100\n\n请严格按照以上格式输入每个练习的正确率: ')
+    inputcrate = input(
+        '模式1:每个练习指定正确率，请直接输入指定的正确率\n如:希望每个练习正确率均为100，则输入 100\n\n模式2:每个练习随机正确率，请输入正确率上下限并用英文逗号隔开\n如:希望每个练习正确率为70～100，则输入 70,100\n\n请严格按照以上格式输入每个练习的正确率: ')
     if ',' in inputcrate:
-        mycrate=eval(inputcrate)
-        randommode=True
+        mycrate = eval(inputcrate)
+        randommode = True
     else:
-        mycrate=inputcrate
-        randommode=False
+        mycrate = inputcrate
+        randommode = False
     printline()
     # 伪造请求
     way1Succeed, way2Succeed, way1Failed, way2Failed = 0, 0, 0, 0
@@ -79,7 +86,7 @@ while True:
         "Referer": f"https://welearn.sflep.com/student/course_info.aspx?cid={cid}",
     }
 
-    if(unitidx == 0):
+    if (unitidx == 0):
         i = 0
     else:
         i = unitidx - 1
@@ -93,15 +100,16 @@ while True:
             break
 
         for course in response.json()["info"]:
-            if course['isvisible']=='false':  # 跳过未开放课程
+            if course['isvisible'] == 'false':  # 跳过未开放课程
                 print(f'[!!跳过!!]    {course["location"]}')
             elif "未" in course["iscomplete"]:  # 章节未完成
                 print(f'[即将完成]    {course["location"]}')
                 if randommode is True:
-                    crate=str(randint(mycrate[0],mycrate[1]))
+                    crate = str(randint(mycrate[0], mycrate[1]))
                 else:
-                    crate=mycrate
-                data = '{"cmi":{"completion_status":"completed","interactions":[],"launch_data":"","progress_measure":"1","score":{"scaled":"'+crate+'","raw":"100"},"session_time":"0","success_status":"unknown","total_time":"0","mode":"normal"},"adl":{"data":[]},"cci":{"data":[],"service":{"dictionary":{"headword":"","short_cuts":""},"new_words":[],"notes":[],"writing_marking":[],"record":{"files":[]},"play":{"offline_media_id":"9999"}},"retry_count":"0","submit_time":""}}[INTERACTIONINFO]'
+                    crate = mycrate
+                data = '{"cmi":{"completion_status":"completed","interactions":[],"launch_data":"","progress_measure":"1","score":{"scaled":"'+crate + \
+                    '","raw":"100"},"session_time":"0","success_status":"unknown","total_time":"0","mode":"normal"},"adl":{"data":[]},"cci":{"data":[],"service":{"dictionary":{"headword":"","short_cuts":""},"new_words":[],"notes":[],"writing_marking":[],"record":{"files":[]},"play":{"offline_media_id":"9999"}},"retry_count":"0","submit_time":""}}[INTERACTIONINFO]'
 
                 id = course["id"]
                 session.post(ajaxUrl, data={"action": "startsco160928",
@@ -115,9 +123,9 @@ while True:
                                                        "scoid": id,
                                                        "uid": uid,
                                                        "data": data,
-                                                       "isend": "False" },
+                                                       "isend": "False"},
                                         headers={"Referer": f"https://welearn.sflep.com/Student/StudyCourse.aspx?cid={cid}&classid={classid}&sco={id}"})
-                print(f'>>>>>>>>>>>>>>正确率:{crate:>3}%',end='  ')
+                print(f'>>>>>>>>>>>>>>正确率:{crate:>3}%', end='  ')
                 if '"ret":0' in response.text:
                     print("方式1:成功!!!", end="  ")
                     way1Succeed += 1
@@ -165,5 +173,5 @@ print(f"""
 方式1: {way1Succeed} 成功, {way1Failed} 失败
 方式2: {way2Succeed} 成功, {way2Failed} 失败
 
-**********  有问题请邮件联系hhy5562877@163.com  **********""")
+***************************************************""")
 input("按任意键退出")

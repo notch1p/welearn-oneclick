@@ -15,13 +15,15 @@ def printline():
 
 # get cookies
 try:  # get from command line
-    cookie = dict(map(lambda x: x.split('=', 1), sys.argv[1].split(";")))
+    # cookie = dict(map(lambda x: x.split('=', 1), sys.argv[1].split(";")))
+    cookie = eval(open("./cookies.txt", 'r').read())
 except:
     printline()
     try:
-        cookie = dict(
-            map(lambda x: x.split('=', 1),
-                open("./cookies.txt", 'r').read().split(";")))
+        # cookie = dict(
+        #     map(lambda x: x.split('=', 1),
+        #         open("./cookies.txt", 'r').read().split(";")))
+        cookie = eval(open("./cookies.txt", 'r').read())
     except:
         input('Cookie输入错误!!!')
         exit(0)
@@ -151,6 +153,7 @@ def startstudy(learntime, x):
             'Referer': 'https://welearn.sflep.com/Student/StudyCourse.aspx'
         })
 
+
 while True:
     url = 'https://welearn.sflep.com/ajax/authCourse.aspx?action=gmc'
     req = session.get(
@@ -206,7 +209,7 @@ while True:
         inputtime = int(inputdata)
         mode = 1
 
-    threads = 100  #最大线程数设置
+    threads = 100  # 最大线程数设置
     running = []
     runningnumber = maxtime = 0
     wrong = []

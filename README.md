@@ -2,25 +2,47 @@
 
 Based on [this repo](https://gitee.com/xxxhhy/welearn-curriculum-finsh).
 
-fixed that the script fails on macOS due to the maximum line length is 1024(Kernel Restriction) which is smaller than the cookies itself.
+## Changes
 
-**Usage**	Pass the cookies thru command line or create a file named `cookies.txt` and paste your cookies in it.
+- fixed that the script fails on macOS due to the maximum line length is 1024(Kernel Restriction) which is smaller than the cookies itself.
+- Aside from authenticating w/ Cookies, Username & Password login is made possible again (essentially we're getting the cookies from normal login).
 
-**Notice**	As stated above, on macOS one should store the cookies in a file instead of pasting them directly in the terminal(otherwise the string would be cut off). but if you have to use clipboard, try this:
+## Usage
 
-```bash
-pbcopy | python ./WelearnCurriculumFinish.py # pass by command line
+**TL;DR**	Pass the cookies thru command line or create a file named `cookies.txt` and paste your cookies in it.
+
+- `python finishIt.py`: pass your credentials interactively
+
+...or you can pass by argument
+
+- `--user, -u {USERNAME:PASSWORD}`: pass by credentials
+
+```shell
+python -u evan:123456
 ```
 
-Manually specify `cookies.txt` path:
 
-```bash
-cat {PATH-TO-COOKIES} - | python ./WelearnCurriculumFinish.py # DONOT forget the DASH
+
+- `--parse, -p {COOKIES}` : pass directly by raw format cookies as shown below
+
+```shell
+python -p paste-your-cookies-here
 ```
 
-`-`is treated as `stdin` so that when piping the cookies to the script it does not end with an EOF.
+  
 
-**-----Original README Below-----**
+<img src="https://flexio.blob.core.windows.net/notch1p/2023/09/f562409b874c1da366abbf75535f11fd.png" alt="Raw cookies" style="zoom:50%;" />
+
+**Notice**	As stated above, on macOS one should just input their username & password instead of pasting them directly in the terminal(otherwise the string would be cut off). but if you have to use Raw Cookies from clipboard or files, try *command substitution*:
+
+```shell
+python finishIt.py --parse "$(cat {PATH-TO-COOKIES})" # from a file
+python finishIt.py --parse "$(pbpaste)" # from clipboard
+```
+
+
+
+**-----Original README-----**
 
 > ## 简介
 >
