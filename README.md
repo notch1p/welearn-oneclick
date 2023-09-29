@@ -1,4 +1,5 @@
-## **WelearnFinishALL**
+**DISCLAIMER: The author shall take no responsibility for any harm that is caused by someone else using the scripts. This repo was created purely out of academic interests. You are VOLUNTEERING to use it, and by doing so you acknowledge the fact that only you are responsible for yourself. And if somehow you find yourself fucked due to using the script-- idk maybe Pray to God.**
+# WelearnFinishALL
 
 Based on [this repo](https://gitee.com/xxxhhy/welearn-curriculum-finsh).
 
